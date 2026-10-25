@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#6366F1">
+  <meta name="description" content="StudyFlow giúp bạn chia nhỏ việc học theo deadline và tập trung với Pomodoro. Học đúng kế hoạch, hoàn thành đúng hạn.">
+  <title>StudyFlow — Học đúng kế hoạch</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <svg class="svg-definitions" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <symbol id="icon-book" viewBox="0 0 24 24"><path d="M12 5.5C8.8 3.6 5.6 3.4 2.5 4.5v15c3.1-1.1 6.3-.9 9.5 1 3.2-1.9 6.4-2.1 9.5-1v-15C18.4 3.4 15.2 3.6 12 5.5Zm0 0v15"/></symbol>
+      <symbol id="icon-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.7"/><rect x="14" y="3" width="7" height="7" rx="1.7"/><rect x="3" y="14" width="7" height="7" rx="1.7"/><rect x="14" y="14" width="7" height="7" rx="1.7"/></symbol>
+      <symbol id="icon-check-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8 12 2.5 2.5L16 9"/></symbol>
+      <symbol id="icon-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+      <symbol id="icon-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M7 3v4m10-4v4M3 11h18m-13 4h.01M12 15h.01M16 15h.01"/></symbol>
+      <symbol id="icon-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+      <symbol id="icon-arrow-right" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></symbol>
+      <symbol id="icon-chevron-right" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
+      <symbol id="icon-play" viewBox="0 0 24 24"><path d="m9 5 11 7-11 7V5Z"/></symbol>
+      <symbol id="icon-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></symbol>
+      <symbol id="icon-stop" viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="2"/></symbol>
+      <symbol id="icon-search" viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="7.3"/><path d="m16 16 4.5 4.5"/></symbol>
+      <symbol id="icon-edit" viewBox="0 0 24 24"><path d="m15 4 5 5M4 15 16.2 2.8a2.1 2.1 0 0 1 3 0l2 2a2.1 2.1 0 0 1 0 3L9 20l-6 1 1-6Z"/></symbol>
+      <symbol id="icon-trash" viewBox="0 0 24 24"><path d="M3 6h18M9 6V3h6v3M5 6l1 15h12l1-15M10 10v7m4-7v7"/></symbol>
+      <symbol id="icon-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+      <symbol id="icon-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol>
+      <symbol id="icon-refresh" viewBox="0 0 24 24"><path d="M20 7v5h-5M4 17v-5h5"/><path d="M6 6a8 8 0 0 1 13 2M5 16a8 8 0 0 0 13 2"/></symbol>
+      <symbol id="icon-coffee" viewBox="0 0 24 24"><path d="M4 8h13v8a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V8Zm13 1h2a3 3 0 1 1 0 6h-2M7 2v3m4-3v3m4-3v3M2 23h18"/></symbol>
+      <symbol id="icon-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></symbol>
+      <symbol id="icon-alert" viewBox="0 0 24 24"><path d="m10.3 3.9-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.7-3.1l-8-14a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4m0 4h.01"/></symbol>
+      <symbol id="icon-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10h.01"/></symbol>
+      <symbol id="icon-leaf" viewBox="0 0 24 24"><path d="M20 3C9 2 3 7 5 14s16 7 15-11ZM3 21 16 8"/></symbol>
+      <symbol id="icon-chart" viewBox="0 0 24 24"><path d="M4 3v18h17M8 16v-5m5 5V7m5 9V4"/></symbol>
+      <symbol id="illustration-empty" viewBox="0 0 180 140">
+        <ellipse cx="91" cy="125" rx="61" ry="7" fill="#EDEDFB"/>
+        <path d="m42 33 78-8 11 95-78 8Z" fill="#E7E7FD"/>
+        <rect x="49" y="18" width="79" height="102" rx="9" transform="rotate(5 49 18)" fill="white" stroke="#C7C9F9" stroke-width="1.5"/>
+        <path d="m63 36 47 4" stroke="#D8DAF9" stroke-width="5" stroke-linecap="round"/>
+        <rect x="60" y="51" width="10" height="10" rx="3" fill="#E8E9FF"/>
+        <path d="m62 55 2 2 4-4" fill="none" stroke="#8183EF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="m78 57 28 2" stroke="#E1E4EF" stroke-width="4" stroke-linecap="round"/>
+        <rect x="59" y="71" width="10" height="10" rx="3" fill="#E8E9FF"/>
+        <path d="m77 77 23 2" stroke="#E1E4EF" stroke-width="4" stroke-linecap="round"/>
+        <rect x="57" y="91" width="10" height="10" rx="3" fill="#F0F1F8"/>
+        <path d="m75 97 28 2" stroke="#E1E4EF" stroke-width="4" stroke-linecap="round"/>
+        <g transform="rotate(28 131 88)"><rect x="126" y="51" width="10" height="66" rx="4" fill="#8183F0"/><path d="m126 111 5 13 5-13" fill="#D0CCF7"/><path d="m129 119 2 5 2-5" fill="#6366F1"/><path d="M129 55v53" stroke="#A5B4FC" stroke-width="2"/></g>
+        <path d="M35 54v10m-5-5h10M143 30v8m-4-4h8" stroke="#A5B4FC" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="33" cy="95" r="3" fill="#BBDCCC"/><circle cx="146" cy="106" r="3" fill="#E9CC99"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <a class="skip-link" href="#main-content">Đến nội dung chính</a>
+  <aside class="sidebar" aria-label="Thanh điều hướng">
+    <a class="brand" href="#today" aria-label="StudyFlow — Hôm nay">
+      <span class="brand-mark"><svg class="icon"><use href="#icon-book"/></svg></span>
+      <span>Study<span class="brand-accent">Flow</span><span class="brand-dot">.</span></span>
+    </a>
+    <p class="nav-caption">KHÔNG GIAN HỌC TẬP</p>
+    <nav class="navigation" aria-label="Điều hướng chính">
+      <button type="button" class="nav-item is-active" data-view="today" aria-current="page"><svg class="icon"><use href="#icon-grid"/></svg><span>Hôm nay</span><span class="nav-active-dot"></span></button>
+      <button type="button" class="nav-item" data-view="tasks"><svg class="icon"><use href="#icon-check-circle"/></svg><span>Nhiệm vụ</span><span id="nav-task-count" class="nav-count">0</span></button>
+      <button type="button" class="nav-item" data-view="pomodoro"><svg class="icon"><use href="#icon-clock"/></svg><span>Pomodoro</span></button>
+    </nav>
+    <button id="sidebar-timer" class="sidebar-timer" type="button" data-view="pomodoro" hidden><span class="live-dot"></span><span>Phiên hiện tại</span><strong id="sidebar-timer-time">25:00</strong></button>
+    <div class="sidebar-bottom">
+      <div class="encouragement">
+        <svg viewBox="0 0 180 100" class="plant-illustration" aria-hidden="true"><ellipse cx="88" cy="88" rx="39" ry="5" fill="#E4E5F6"/><path d="M77 62h28l-4 24H81Z" fill="#C3C5F5"/><path d="M90 66V30" fill="none" stroke="#9499D3" stroke-width="2.5"/><path d="M90 48C67 49 64 30 66 24c18 0 28 9 24 24Z" fill="#B7B9EC"/><path d="M91 58c-1-21 11-32 26-30 0 18-10 31-26 30Z" fill="#D4D6F5"/><path d="M91 35C80 24 84 12 94 6c11 10 11 21-3 29Z" fill="#989CE0"/><path d="m43 48 3-5 3 5-3 5Z" fill="#CDCFF0"/><circle cx="129" cy="61" r="2.5" fill="#B8BCDF"/></svg>
+        <p>Tích lũy từng chút.<br><strong>Tiến bộ mỗi ngày.</strong></p>
+        <span>Một phiên học cũng là một khởi đầu.</span>
+      </div>
+      <div id="local-storage-status" class="local-status"><span class="status-dot"></span><span id="local-storage-label">Lưu trên trình duyệt của bạn</span><svg class="icon"><use href="#icon-info"/></svg></div>
+      <div class="sidebar-footnote"><span>StudyFlow MVP</span><span>Miễn phí</span></div>
+    </div>
+  </aside>
+
+  <main id="main-content" class="main-content" tabindex="-1">
+    <header class="page-header">
+      <div class="page-heading"><p class="eyebrow">GÓC HỌC TẬP CỦA BẠN</p><h1 id="page-title">Hôm nay</h1><p id="page-description">Học đúng kế hoạch, hoàn thành đúng hạn.</p></div>
+      <div class="header-actions"><div class="date-display"><svg class="icon"><use href="#icon-calendar"/></svg><span id="current-date"></span></div><button type="button" class="btn btn-primary" data-action="add-task"><svg class="icon"><use href="#icon-plus"/></svg><span>Thêm nhiệm vụ</span></button></div>
+    </header>
+
+    <section id="view-today" class="view" aria-label="Kế hoạch hôm nay">
+      <div class="welcome-banner">
+        <div class="welcome-copy"><span class="welcome-eyebrow"><span class="tiny-spark">✦</span> HỌC ĐỀU, TIẾN XA</span><h2>Một chút tập trung.<br>Một bước gần mục tiêu.</h2><p>Chia nhỏ việc học, dành chỗ cho những điều lớn lao.</p></div>
+        <svg class="welcome-illustration" viewBox="0 0 350 190" aria-hidden="true">
+          <circle cx="208" cy="101" r="80" fill="#E5E4FB"/><circle cx="208" cy="101" r="64" fill="none" stroke="#D7D7F5" stroke-dasharray="4 7"/>
+          <g transform="rotate(-10 167 94)"><rect x="119" y="35" width="99" height="122" rx="10" fill="#CFCEF6"/><rect x="113" y="29" width="99" height="122" rx="10" fill="white"/><path d="M130 50h38" stroke="#7979DB" stroke-width="5" stroke-linecap="round"/><path d="M130 61h62" stroke="#E8E8F5" stroke-width="4" stroke-linecap="round"/><rect x="129" y="78" width="13" height="13" rx="4" fill="#E8E8FE"/><path d="m132 84 3 3 5-6" fill="none" stroke="#8183ED" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M151 84h38" stroke="#DDDEEE" stroke-width="4" stroke-linecap="round"/><rect x="129" y="101" width="13" height="13" rx="4" fill="#E8E8FE"/><path d="m132 107 3 3 5-6" fill="none" stroke="#8183ED" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M151 107h28" stroke="#DDDEEE" stroke-width="4" stroke-linecap="round"/><path d="M130 132h60" stroke="#EEEFFA" stroke-width="4" stroke-linecap="round"/></g>
+          <g transform="rotate(9 247 124)"><rect x="209" y="88" width="76" height="76" rx="19" fill="#6366F1"/><circle cx="247" cy="126" r="23" fill="none" stroke="#A5B4FC" stroke-width="2"/><path d="M247 112v14l9 5" fill="none" stroke="white" stroke-width="3" stroke-linecap="round"/><path d="M243 95h8" stroke="white" stroke-width="3" stroke-linecap="round"/></g>
+          <path d="m278 38 3 8 8 3-8 3-3 8-3-8-8-3 8-3Z" fill="#9698E9"/><path d="m90 125 2 6 6 2-6 2-2 6-2-6-6-2 6-2Z" fill="#A5B4FC"/><circle cx="292" cy="139" r="4" fill="#C8C8F3"/><path d="m236 27 6-9m47 66 10-2M94 68l-8-5" stroke="#B0AFE9" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+
+      <div class="stats-grid">
+        <article class="stat-card"><span class="stat-icon purple"><svg class="icon"><use href="#icon-clock"/></svg></span><div class="stat-content"><p>Đã tập trung hôm nay</p><strong id="today-focus-value">0 phút</strong><span id="today-focus-note">Mỗi phút tập trung đều có ý nghĩa</span></div></article>
+        <article class="stat-card"><span class="stat-icon amber"><svg class="icon"><use href="#icon-target"/></svg></span><div class="stat-content"><p>Gợi ý học hôm nay</p><strong id="today-plan-value">0 phút</strong><span id="today-plan-note">Chia đều đến ngày đến hạn</span></div></article>
+        <article class="stat-card"><span class="stat-icon green"><svg class="icon"><use href="#icon-book"/></svg></span><div class="stat-content"><p>Nhiệm vụ đang mở</p><strong id="active-task-value">0</strong><span id="active-task-note">Sẵn sàng cho mục tiêu đầu tiên</span></div></article>
+      </div>
+
+      <div class="today-layout">
+        <div class="today-primary">
+          <section class="panel today-plan-panel"><div class="panel-heading"><div class="section-title"><h2>Kế hoạch hôm nay</h2><span class="count-badge" id="today-task-count">0</span></div><button class="text-button" type="button" data-view="tasks">Xem tất cả<svg class="icon"><use href="#icon-arrow-right"/></svg></button></div><div id="today-list" class="task-list today-task-list"></div><div class="panel-footnote"><svg class="icon"><use href="#icon-refresh"/></svg><span>Kế hoạch tự điều chỉnh khi bạn ghi nhận thời gian học.</span></div></section>
+          <section id="overdue-section" class="panel overdue-panel" hidden><div class="panel-heading"><div class="section-title"><span class="section-icon amber"><svg class="icon"><use href="#icon-alert"/></svg></span><h2>Cần thêm một chút ưu tiên</h2></div><span class="badge badge-warning">Quá hạn</span></div><div id="overdue-list" class="task-list"></div></section>
+          <section id="ready-section" class="panel" hidden><div class="panel-heading"><div class="section-title"><span class="section-icon green"><svg class="icon"><use href="#icon-check-circle"/></svg></span><h2>Đã đủ thời lượng</h2></div></div><p class="section-description">Xác nhận hoàn thành nếu bạn đã xong, hoặc tăng thời gian ước tính để tiếp tục.</p><div id="ready-list" class="task-list"></div></section>
+        </div>
+        <aside class="today-secondary" aria-label="Tập trung và phiên học">
+          <section class="panel mini-focus-card"><div class="mini-focus-heading"><span class="mini-focus-icon"><svg class="icon"><use href="#icon-clock"/></svg></span><h2>Một khoảng tập trung</h2><span class="badge badge-soft">POMODORO</span></div><div class="mini-clock"><svg viewBox="0 0 180 180" aria-hidden="true"><circle cx="90" cy="90" r="77" class="mini-clock-track"/><circle cx="90" cy="90" r="77" class="mini-clock-accent"/></svg><div class="mini-clock-content"><span id="mini-timer-label">SẴN SÀNG TẬP TRUNG</span><strong id="mini-timer-time">25:00</strong><span class="mini-clock-bottom">Chỉ một việc, ngay lúc này.</span></div></div><p id="mini-timer-note" class="mini-focus-note">Cất những xao nhãng.<br>Dành một phiên học cho chính mình.</p><button id="mini-focus-button" class="btn btn-primary btn-full" type="button" data-action="open-pomodoro"><svg class="icon"><use href="#icon-play"/></svg>Bắt đầu tập trung</button><span class="mini-focus-footer">Học sâu một chút. Nghỉ ngơi một chút.</span></section>
+          <section class="panel recent-panel"><div class="panel-heading"><h2>Nhịp học hôm nay</h2><span class="count-badge" id="today-session-count">0</span></div><div id="today-sessions" class="session-list"></div></section>
+        </aside>
+      </div>
+    </section>
+
+    <section id="view-tasks" class="view" aria-label="Quản lý nhiệm vụ" hidden>
+      <div class="tasks-toolbar"><label class="search-field"><svg class="icon"><use href="#icon-search"/></svg><span class="sr-only">Tìm tên nhiệm vụ hoặc môn học</span><input id="task-search" type="search" placeholder="Tìm nhiệm vụ hoặc môn học…" autocomplete="off"></label><div class="filter-field"><label for="task-status">Trạng thái</label><select id="task-status"><option value="all">Tất cả nhiệm vụ</option><option value="active">Đang thực hiện</option><option value="completed">Đã hoàn thành</option><option value="overdue">Quá hạn</option></select></div></div>
+      <section class="panel tasks-panel"><div class="panel-heading"><div class="section-title"><h2>Tất cả nhiệm vụ</h2><span class="count-badge" id="tasks-result-count">0</span></div><span class="sort-label"><svg class="icon"><use href="#icon-calendar"/></svg>Deadline gần nhất trước</span></div><div id="task-list" class="task-list all-task-list"></div></section>
+      <p class="page-tip"><svg class="icon"><use href="#icon-info"/></svg>Đủ thời lượng là một cột mốc. Bạn chủ động xác nhận khi nhiệm vụ thật sự hoàn thành.</p>
+    </section>
+
+    <section id="view-pomodoro" class="view" aria-label="Đồng hồ Pomodoro" hidden>
+      <div class="pomodoro-layout">
+        <section class="panel timer-panel">
+          <div class="timer-mode-switch" role="group" aria-label="Loại phiên"><button id="mode-focus" class="is-active" type="button" data-mode="focus"><svg class="icon"><use href="#icon-target"/></svg>Tập trung</button><button id="mode-break" type="button" data-mode="break"><svg class="icon"><use href="#icon-coffee"/></svg>Nghỉ ngơi</button></div>
+          <span id="timer-status" class="timer-status">Sẵn sàng bắt đầu</span>
+          <div class="timer-face"><svg class="timer-ring" viewBox="0 0 260 260" aria-hidden="true"><circle cx="130" cy="130" r="112" class="timer-ring-track"/><circle id="timer-progress" cx="130" cy="130" r="112" class="timer-ring-progress"/></svg><div class="timer-face-content"><span id="timer-phase">THỜI GIAN TẬP TRUNG</span><strong id="timer-display" role="timer" aria-label="Thời gian còn lại">25:00</strong><span class="timer-breathing-dot"></span></div></div>
+          <div class="timer-task"><svg class="icon"><use href="#icon-book"/></svg><span id="timer-task-name">Chọn một nhiệm vụ để bắt đầu</span></div>
+          <div class="timer-controls"><button id="timer-start" type="button" class="btn btn-primary btn-large"><svg class="icon"><use href="#icon-play"/></svg>Bắt đầu tập trung</button><button id="timer-pause" type="button" class="btn btn-primary btn-large" hidden><svg class="icon"><use href="#icon-pause"/></svg>Tạm dừng</button><button id="timer-resume" type="button" class="btn btn-primary btn-large" hidden><svg class="icon"><use href="#icon-play"/></svg>Tiếp tục</button><button id="timer-finish" type="button" class="btn btn-secondary" hidden><svg class="icon"><use href="#icon-check"/></svg>Kết thúc sớm</button></div>
+          <button id="timer-cancel" type="button" class="text-button cancel-session" hidden>Hủy phiên, không ghi nhận</button>
+          <p id="timer-message" class="timer-message" role="status" aria-live="polite">Thời gian tập trung sẽ được cộng vào nhiệm vụ bạn chọn.</p>
+        </section>
+        <aside class="pomodoro-secondary">
+          <section class="panel setup-panel"><div class="panel-heading"><h2>Thiết lập phiên học</h2><svg class="icon muted"><use href="#icon-clock"/></svg></div><div class="setup-body"><label class="field-label" for="task-select">Bạn sẽ học gì?</label><select id="task-select"><option value="">Chọn nhiệm vụ</option></select><div class="selected-task-progress"><div class="progress-track"><div id="pomo-task-progress" class="progress-fill" style="width:0%"></div></div><p id="pomo-task-detail">Mỗi phiên học đưa bạn gần hơn với mục tiêu.</p></div><div class="settings-divider"></div><div class="duration-settings"><div class="form-field"><label for="focus-minutes"><svg class="icon"><use href="#icon-target"/></svg>Tập trung</label><div class="input-with-unit"><input id="focus-minutes" type="number" min="1" max="180" step="1" value="25" inputmode="numeric"><span>phút</span></div></div><div class="form-field"><label for="break-minutes"><svg class="icon"><use href="#icon-coffee"/></svg>Nghỉ ngơi</label><div class="input-with-unit"><input id="break-minutes" type="number" min="1" max="60" step="1" value="5" inputmode="numeric"><span>phút</span></div></div></div><p id="settings-error" class="form-error" role="alert" hidden></p><p class="settings-note">Tùy chỉnh nhịp học phù hợp với bạn. Sau mỗi phiên, bạn chủ động bắt đầu phiên tiếp theo.</p></div></section>
+          <section class="panel recent-panel"><div class="panel-heading"><h2>Phiên tập trung hôm nay</h2><span id="session-count" class="count-badge">0</span></div><div id="session-list" class="session-list"></div></section>
+          <div class="gentle-note"><span class="gentle-note-icon"><svg class="icon"><use href="#icon-leaf"/></svg></span><p><strong>Cho tâm trí một khoảng nghỉ.</strong><br>Đứng dậy, uống nước và nhìn ra xa sau một phiên học.</p></div>
+        </aside>
+      </div>
+    </section>
+    <footer class="main-footer"><span>Ít xao nhãng hơn. Nhiều tiến bộ hơn.</span><span><svg class="icon"><use href="#icon-leaf"/></svg>Được tạo cho nhịp học của bạn</span></footer>
+  </main>
+
+  <dialog id="task-dialog" class="modal" aria-labelledby="task-dialog-title" aria-describedby="task-dialog-description"><form id="task-form" novalidate><div class="modal-heading"><div><span class="eyebrow">THÊM MỘT MỤC TIÊU NHỎ</span><h2 id="task-dialog-title">Thêm nhiệm vụ</h2></div><button type="button" class="icon-button" data-close-dialog aria-label="Đóng biểu mẫu"><svg class="icon"><use href="#icon-close"/></svg></button></div><p id="task-dialog-description" class="modal-description">Bạn đặt mục tiêu. StudyFlow giúp chia nhỏ mỗi ngày.</p><input type="hidden" id="task-id"><div class="form-field"><label for="task-name">Tên công việc <span class="required">*</span></label><input id="task-name" type="text" placeholder="Ví dụ: Ôn tập chương 3 — Tích phân" maxlength="160" required autocomplete="off"></div><div class="form-grid"><div class="form-field"><label for="task-subject">Môn học <span class="required">*</span></label><input id="task-subject" type="text" placeholder="Ví dụ: Giải tích" maxlength="80" required autocomplete="off"></div><div class="form-field"><label for="task-deadline">Ngày đến hạn <span class="required">*</span></label><input id="task-deadline" type="date" required></div></div><fieldset class="duration-fieldset"><legend>Tổng thời gian dự kiến <span class="required">*</span></legend><div class="form-grid"><div class="form-field"><label class="sr-only" for="task-hours">Số giờ dự kiến</label><div class="input-with-unit"><input id="task-hours" type="number" min="0" max="9999" step="1" inputmode="numeric" placeholder="0" value="1"><span>giờ</span></div></div><div class="form-field"><label class="sr-only" for="task-minutes">Số phút dự kiến</label><div class="input-with-unit"><input id="task-minutes" type="number" min="0" max="59" step="1" inputmode="numeric" placeholder="0" value="0"><span>phút</span></div></div></div><p class="field-help">Ước tính vừa sức. Bạn có thể điều chỉnh bất cứ lúc nào.</p></fieldset><p id="task-form-error" class="form-error" role="alert" hidden></p><div class="modal-actions"><button type="button" class="btn btn-secondary" data-close-dialog>Để sau</button><button id="save-task" type="submit" class="btn btn-primary"><svg class="icon"><use href="#icon-plus"/></svg>Lưu nhiệm vụ</button></div></form></dialog>
+  <dialog id="confirm-dialog" class="modal confirm-modal" aria-labelledby="confirm-title" aria-describedby="confirm-message"><div class="confirm-icon"><svg class="icon"><use href="#icon-alert"/></svg></div><h2 id="confirm-title">Xác nhận</h2><p id="confirm-message"></p><div class="modal-actions"><button id="confirm-cancel" type="button" class="btn btn-secondary">Để sau</button><button id="confirm-accept" type="button" class="btn btn-primary">Xác nhận</button></div></dialog>
+  <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="false"></div>
+  <noscript><div class="noscript-message">Vui lòng bật JavaScript trong trình duyệt để sử dụng StudyFlow.</div></noscript>
+</body>
+</html>
